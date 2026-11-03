@@ -7,19 +7,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alexia.producer.services.StringService;
+import lombok.RequiredArgsConstructor;
 
-@RestController 
+@RestController
+@RequiredArgsConstructor
 @RequestMapping(value = "/produces")
 public class StringController {
-    private final StringService stringService;
 
-    public StringController(StringService stringService) {
-        this.stringService = stringService;
-    }
+    private final StringService service;
 
     @GetMapping
-    public ResponseEntity<String> produces(@RequestParam String message) {
-        stringService.produce(message);
-        return ResponseEntity.ok("Message sent to RabbitMQ: " + message);
+    public ResponseEntity<String> produces(@RequestParam("message") String message) {
+        service.produce(message);
+        return ResponseEntity.ok().body("Sending message");
     }
 }
