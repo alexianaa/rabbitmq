@@ -9,12 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 
+import static constants.RabbitMQConstants.RK_PRODUCT_LOG;
+import static constants.RabbitMQConstants.QUEUE_PRODUCT_LOG;
+import static constants.RabbitMQConstants.EXG_NAME_MARKETPLACE;
+
+
 @Configuration
 public class RabbitMQConfig {
-
-    public static final String EXG_NAME_MARKETPLACE = "marketplace.direct";
-    public static final String QUEUE_PRODUCT_LOG    = "product.log";
-    public static final String RK_PRODUCT_LOG       = "product.log";
 
     @Bean
     public Queue queue() {
@@ -25,6 +26,9 @@ public class RabbitMQConfig {
     public DirectExchange directExchange() {
         return new DirectExchange(EXG_NAME_MARKETPLACE, true, false);
     }
+
+    //TODO: create a fanout exchange
+    //TODO: create a topic exchange
 
     @Bean
     public Binding binding(Queue queue, DirectExchange directExchange) {

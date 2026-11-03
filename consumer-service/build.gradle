@@ -27,6 +27,7 @@ dependencies {
 	testCompileOnly 'org.projectlombok:lombok'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testAnnotationProcessor 'org.projectlombok:lombok'
+	implementation files('../commons/target/commons-0.0.2-SNAPSHOT.jar')
 }
 
 tasks.named('test') {
